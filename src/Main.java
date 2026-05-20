@@ -2,37 +2,42 @@
 import model.EquipeManutencao;
 import model.TrechoRodovia;
 
-import java.util.List;
-
 public class Main {
-    private static final double LIMITE_VEGETACAO_CRITICA = 30.0;
-
     public static void main(String[] args) {
+        double limiteVegetacaoCritica = 30.0;
+
         TrechoRodovia trechoSerra = new TrechoRodovia("BR-116", 10, 15, 10);
         TrechoRodovia trechoVale = new TrechoRodovia("SP-348", 40, 45, 22);
 
         trechoSerra.registrarCrescimento(5);
         trechoVale.registrarCrescimento(13);
 
-        List<TrechoRodovia> trechosMonitorados = List.of(trechoSerra, trechoVale);
         EquipeManutencao equipeRocada = new EquipeManutencao("Equipe Alfa", 4, "rocada mecanizada");
 
-        TrechoRodovia trechoCritico = encontrarTrechoMaisCritico(trechosMonitorados);
-        if (trechoCritico.verificarCriticidade(LIMITE_VEGETACAO_CRITICA)) {
+        TrechoRodovia trechoCritico = trechoSerra;
+        if (trechoVale.getNivelVegetacao() > trechoSerra.getNivelVegetacao()) {
+            trechoCritico = trechoVale;
+        }
+
+        if (trechoCritico.verificarCriticidade(limiteVegetacaoCritica)) {
             trechoCritico.associarEquipeManutencao(equipeRocada);
         }
 
         System.out.println("Monitoramento de vegetacao em rodovias");
         System.out.println("--------------------------------------");
 
-        for (TrechoRodovia trecho : trechosMonitorados) {
-            System.out.printf(
-                    "%s | vegetacao: %.1f cm | status: %s%n",
-                    trecho.obterDescricao(),
-                    trecho.getNivelVegetacao(),
-                    trecho.verificarCriticidade(LIMITE_VEGETACAO_CRITICA) ? "CRITICO" : "normal"
-            );
+        String statusTrechoSerra = "normal";
+        if (trechoSerra.verificarCriticidade(limiteVegetacaoCritica)) {
+            statusTrechoSerra = "CRITICO";
         }
+
+        String statusTrechoVale = "normal";
+        if (trechoVale.verificarCriticidade(limiteVegetacaoCritica)) {
+            statusTrechoVale = "CRITICO";
+        }
+
+        System.out.println(trechoSerra.obterDescricao() + " | vegetacao: " + trechoSerra.getNivelVegetacao() + " cm | status: " + statusTrechoSerra);
+        System.out.println(trechoVale.obterDescricao() + " | vegetacao: " + trechoVale.getNivelVegetacao() + " cm | status: " + statusTrechoVale);
 
         System.out.println();
         if (trechoCritico.getEquipeManutencao() != null) {
@@ -41,20 +46,5 @@ public class Main {
         } else {
             System.out.println("Nenhum trecho ultrapassou o limite critico de vegetacao.");
         }
-    }
-
-    private static TrechoRodovia encontrarTrechoMaisCritico(List<TrechoRodovia> trechosMonitorados) {
-        if (trechosMonitorados == null || trechosMonitorados.isEmpty()) {
-            throw new IllegalArgumentException("Informe ao menos um trecho monitorado.");
-        }
-
-        TrechoRodovia trechoMaisCritico = trechosMonitorados.get(0);
-        for (TrechoRodovia trecho : trechosMonitorados) {
-            if (trecho.getNivelVegetacao() > trechoMaisCritico.getNivelVegetacao()) {
-                trechoMaisCritico = trecho;
-            }
-        }
-
-        return trechoMaisCritico;
     }
 }

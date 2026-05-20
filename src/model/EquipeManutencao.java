@@ -1,26 +1,28 @@
 package model;
 
 public class EquipeManutencao {
-    private final String nome;
-    private final int quantidadeIntegrantes;
-    private final String especialidade;
+    private String nome;
+    private int quantidadeIntegrantes;
+    private String especialidade;
 
     public EquipeManutencao(String nome, int quantidadeIntegrantes, String especialidade) {
-        if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("O nome da equipe deve ser informado.");
+        if (nome == null || nome.trim().isEmpty()) {
+            this.nome = "Equipe sem nome";
+        } else {
+            this.nome = nome;
         }
 
         if (quantidadeIntegrantes <= 0) {
-            throw new IllegalArgumentException("A equipe deve ter pelo menos um integrante.");
+            this.quantidadeIntegrantes = 1;
+        } else {
+            this.quantidadeIntegrantes = quantidadeIntegrantes;
         }
 
-        if (especialidade == null || especialidade.isBlank()) {
-            throw new IllegalArgumentException("A especialidade deve ser informada.");
+        if (especialidade == null || especialidade.trim().isEmpty()) {
+            this.especialidade = "sem especialidade";
+        } else {
+            this.especialidade = especialidade;
         }
-
-        this.nome = nome;
-        this.quantidadeIntegrantes = quantidadeIntegrantes;
-        this.especialidade = especialidade;
     }
 
     public String obterResumo() {

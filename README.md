@@ -1,6 +1,8 @@
-# Monitoramento de Vegetacao em Rodovias
+# Monitoramento de Vegetacao nas Rodovias
 
-Prototipo em console para a Sprint 1 do Challenge. O sistema modela trechos de rodovia, simula o crescimento da vegetacao e associa uma equipe de manutencao ao trecho considerado critico.
+Sprint 1 OBJECT-ORIENTED PROGRAMMING.
+
+O objetivo e construir um sistema de monitoramento e priorizacao de rocada de vegetacao nas rodovias. A ideia e criar um prototipo simples em console para representar trechos de rodovia, registrar o crescimento da vegetacao e indicar qual trecho precisa de uma equipe de manutencao.
 
 ## Integrantes
 
@@ -13,11 +15,11 @@ Prototipo em console para a Sprint 1 do Challenge. O sistema modela trechos de r
 ## O que foi implementado
 
 - Classe `TrechoRodovia`, com `quilometroInicial`, `quilometroFinal` e `nivelVegetacao`.
-- Classe `EquipeManutencao`, representando a equipe responsavel pela rocada.
-- Instanciacao de dois trechos diferentes no `Main`.
-- Metodo `registrarCrescimento(double taxa)`, que aumenta o nivel da vegetacao.
-- Encapsulamento de `nivelVegetacao`, impedindo valores negativos.
-- Associacao de uma equipe de manutencao ao trecho critico.
+- Classe `EquipeManutencao`, para representar a equipe responsavel pela rocada.
+- Dois trechos de rodovia criados no `Main`.
+- Metodo `registrarCrescimento(double taxa)` para simular o aumento da vegetacao.
+- Atributo `nivelVegetacao` privado, com validacao para nao aceitar valor negativo.
+- Associacao da equipe de manutencao ao trecho com nivel critico de vegetacao.
 
 ## Estrutura
 
@@ -33,12 +35,12 @@ src/
 
 **Por que `TrechoRodovia` e uma classe e "BR-116 KM 10 ao 15" e um objeto?**
 
-`TrechoRodovia` e uma classe porque define o modelo geral de um trecho de rodovia, com seus atributos e comportamentos. "BR-116 KM 10 ao 15" e um objeto porque representa um trecho especifico criado a partir dessa classe.
+`TrechoRodovia` e uma classe porque representa a ideia geral de um trecho de rodovia, com atributos e comportamentos. "BR-116 KM 10 ao 15" e um objeto porque e um trecho especifico criado a partir dessa classe.
 
 **Como um metodo difere de uma funcao solta em programacao estruturada?**
 
-Um metodo pertence a uma classe ou objeto e normalmente altera ou consulta o estado desse objeto. Uma funcao solta executa uma tarefa sem estar diretamente ligada a uma instancia.
+Um metodo pertence a uma classe ou a um objeto. Ele pode usar e alterar os dados desse objeto. Uma funcao solta executa uma tarefa sem estar ligada diretamente a uma instancia.
 
 **Se `nivelVegetacao` fosse publico, que tipo de quebra poderia acontecer?**
 
-Um programador poderia alterar o valor diretamente para algo invalido, como `-5`. Isso quebraria a regra de negocio, pois a vegetacao nao pode ter altura negativa, e prejudicaria a previsao e a priorizacao dos trechos.
+Um programador poderia colocar um valor invalido, como `-5`. Isso quebraria a regra de negocio, porque a vegetacao nao pode ter altura negativa, e tambem poderia atrapalhar a priorizacao dos trechos.
