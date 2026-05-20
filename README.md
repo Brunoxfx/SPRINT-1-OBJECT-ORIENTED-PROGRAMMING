@@ -2,6 +2,14 @@
 
 Prototipo em console para a Sprint 1 do Challenge. O sistema modela trechos de rodovia, simula o crescimento da vegetacao e associa uma equipe de manutencao ao trecho considerado critico.
 
+## Integrantes
+
+- Bruno Anselmo Da Silva - RM 566521
+- Fernando de Almeida Godoi - RM 564820
+- Gabriel Ber Soares - RM 563520
+- Guilherme de Freitas Salgado - RM 562494
+- Vinicius Ribeiro Dias - RM 566468
+
 ## O que foi implementado
 
 - Classe `TrechoRodovia`, com `quilometroInicial`, `quilometroFinal` e `nivelVegetacao`.
